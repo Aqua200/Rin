@@ -25,8 +25,8 @@ let handler = async (m, { conn }) => {
   let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
   mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
 
-  // Solo mostramos el mensaje del único owner
-  mensaje += `• *${displayName}*\n📞 +${number}\n📄 ${bio}\n\n`;
+  // Solo mostramos el mensaje del único owner sin repetir el número
+  mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
 
   await conn.sendMessage(m.chat, { text: mensaje }, { quoted: m });
 
