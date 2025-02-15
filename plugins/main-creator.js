@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
-  // Definimos el número y nombre del único owner aquí
   const contact = ["526631079388", "Anika Dm", 1];
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
@@ -21,26 +20,28 @@ let handler = async (m, { conn }) => {
     bio = "Sin descripción";
   }
 
-  // Nombre del canal que queremos mostrar en el texto
   const newsletterName = 'Seguirme bb 😘';
-
-  // Creamos el mensaje de texto (caption) incluyendo la información del canal
   let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
   mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
   mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
   mensaje += `Canal: ${newsletterName}\n\n`;
 
-  // Descargamos la imagen desde la URL
-  const imageUrl = 'https://qu.ax/DnkVz.jpg';
-  const response = await fetch(imageUrl);
-  const buffer = await response.buffer();
+  // URL del video (MP4)
+  const videoUrl = 'https://qu.ax/WTWHk.mp4'; // Reemplázalo con un enlace MP4 válido
 
-  // Enviamos la imagen con el texto (caption) que incluye la información del canal
-  await conn.sendMessage(m.chat, { 
-    image: buffer,
-    caption: mensaje,
-    mimetype: 'image/jpeg'
-  }, { quoted: m });
+  try {
+    const videoResponse = await fetch(videoUrl);
+    const videoBuffer = await videoResponse.buffer();
+    
+    await conn.sendMessage(m.chat, { 
+      video: videoBuffer,
+      caption: mensaje,
+      mimetype: 'video/mp4'
+    }, { quoted: m });
+
+  } catch (error) {
+    console.error('Error al enviar el video:', error);
+  }
 
   // Enviar el contacto del owner en formato VCARD
   const vcard = `BEGIN:VCARD
