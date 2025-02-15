@@ -2,13 +2,25 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
   // Definimos el número y nombre del único owner aquí
-  const contact = ["5216631079388", "Neykoor", 1]; // Número y nombre del único owner
+  const contact = ["526631079388", "Anika Dm", 1]; // Número y nombre del único owner
   
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
-  const displayName = await conn.getName(jid).catch(() => name || "Desconocido");
-  const biografia = await conn.fetchStatus(jid).catch(() => null);
-  const bio = biografia?.status || "Sin descripción";
+  
+  let displayName;
+  try {
+    displayName = await conn.getName(jid); // Obtenemos el nombre del contacto
+  } catch (err) {
+    displayName = name || "Desconocido"; // Si ocurre un error, usamos el nombre por defecto
+  }
+
+  let bio = "Sin descripción";
+  try {
+    const biografia = await conn.fetchStatus(jid); // Obtenemos la biografía del contacto
+    bio = biografia?.status || bio; // Si tiene biografía, la usamos
+  } catch (err) {
+    bio = "Sin descripción"; // Si no tiene biografía, usamos el valor por defecto
+  }
 
   let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
   mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
