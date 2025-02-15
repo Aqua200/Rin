@@ -50,7 +50,7 @@ let handler = async (m, { conn }) => {
     headerType: 4
   };
 
-  // Enviar el mensaje con el botón
+  // Enviar el mensaje con el botón para unirse al canal
   await conn.sendMessage(m.chat, message, { quoted: m });
 
   // Reaccionar al mensaje
