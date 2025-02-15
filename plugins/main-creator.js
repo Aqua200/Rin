@@ -2,50 +2,47 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
   // Definimos el número y nombre del único owner aquí
-  const contact = ["526631079388", "Anika Dm", 1]; // Número y nombre del único owner
+  const contact = ["526631079388", "Anika Dm", 1];
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
   
   let displayName;
   try {
-    displayName = await conn.getName(jid); // Obtenemos el nombre del contacto
+    displayName = await conn.getName(jid);
   } catch (err) {
     displayName = name || "Desconocido";
   }
 
   let bio = "Sin descripción";
   try {
-    const biografia = await conn.fetchStatus(jid); // Obtenemos la biografía del contacto
+    const biografia = await conn.fetchStatus(jid);
     bio = biografia?.status || bio;
   } catch (err) {
     bio = "Sin descripción";
   }
 
-  // Mensaje que se mostrará en el caption de la imagen
+  // Nombre del canal que queremos mostrar en el texto
+  const newsletterName = 'Seguirme bb 😘';
+
+  // Creamos el mensaje de texto (caption) incluyendo la información del canal
   let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
   mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
   mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
+  mensaje += `Canal: ${newsletterName}\n\n`;
 
   // Descargamos la imagen desde la URL
   const imageUrl = 'https://qu.ax/DnkVz.jpg';
   const response = await fetch(imageUrl);
   const buffer = await response.buffer();
 
-  // Enviar la imagen con el caption y la información del canal en contextInfo
+  // Enviamos la imagen con el texto (caption) que incluye la información del canal
   await conn.sendMessage(m.chat, { 
     image: buffer,
     caption: mensaje,
-    mimetype: 'image/jpeg',
-    contextInfo: { 
-      forwardedNewsletterMessageInfo: { 
-        newsletterJid: '120363392571425662@newsletter', 
-        serverMessageId: '', 
-        newsletterName: 'Seguirme bb 😘'
-      }
-    }
+    mimetype: 'image/jpeg'
   }, { quoted: m });
 
-  // Enviar el contacto del único owner en formato VCARD
+  // Enviar el contacto del owner en formato VCARD
   const vcard = `BEGIN:VCARD
 VERSION:3.0
 N:;${displayName};;;
