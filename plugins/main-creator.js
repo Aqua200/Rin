@@ -28,7 +28,11 @@ let handler = async (m, { conn }) => {
   // Solo mostramos el mensaje del único owner sin repetir el número
   mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
 
-  await conn.sendMessage(m.chat, { text: mensaje }, { quoted: m });
+  // Enviar el mensaje con la imagen
+  await conn.sendMessage(m.chat, { 
+    text: mensaje, 
+    image: { url: 'https://example.com/imagen.jpg' } // Cambia esta URL por la imagen que desees
+  }, { quoted: m });
 
   // Enviar el contacto del único owner en formato VCARD
   const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;${displayName};;;\nFN:${displayName}\nORG:${displayName}\nTITLE:\nTEL;waid=${number}:${number}\nX-ABLabel:${bio}\nEND:VCARD`;
