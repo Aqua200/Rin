@@ -20,7 +20,7 @@ let handler = async (m, { conn }) => {
     bio = "Sin descripción";
   }
 
-  const newsletterName = '🔥 Seguirme bb 😘🔥';
+  const newsletterName = '120363206717994793@newsletter';
   
   let mensaje = `*╔══════════════════╗*\n`;
   mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
