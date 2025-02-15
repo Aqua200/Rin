@@ -62,7 +62,7 @@ N:;${displayName};;;
 FN:${displayName}
 ORG:${displayName}
 TITLE:
-TEL;waid=`${{number}:}$`{number}
+TEL;waid=${number}:${number}
 X-ABLabel:${bio}
 END:VCARD`;
 
