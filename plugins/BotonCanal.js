@@ -1,4 +1,11 @@
-const { generateWAMessage } = require('@whiskeysockets/baileys');
+const { WAConnection, MessageType, Mimetype, generateWAMessage } = require('@whiskeysockets/baileys');
+
+// Crear una nueva conexión de WhatsApp
+const conn = new WAConnection();
+
+conn.on('open', () => {
+    console.log('Conexión exitosa');
+});
 
 async function sendButtons(m) {
     const buttons = [
@@ -31,3 +38,25 @@ async function sendButtons(m) {
         contextInfo: { mentionedJid: [m.sender] }, // Opcional: Mencionar al usuario
     }, { quoted: message });
 }
+
+// Función para manejar mensajes
+conn.on('chat-update', async (chatUpdate) => {
+    if (chatUpdate.messages && chatUpdate.messages.length > 0) {
+        const message = chatUpdate.messages[0];
+        const m = message.message;
+
+        if (!message.key.fromMe && m) {
+            // Detectar el comando .hola
+            if (m.text && m.text.toLowerCase() === '.hola') {
+                // Responder con "Hola"
+                conn.sendMessage(message.key.remoteJid, { text: 'Hola' });
+
+                // También puedes agregar el mensaje con el botón después de responder con "Hola"
+                sendButtons(message);
+            }
+        }
+    }
+});
+
+// Conectar a WhatsApp
+conn.connect();
