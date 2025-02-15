@@ -27,7 +27,7 @@ let handler = async (m, { conn }) => {
   mensaje += `Canal: ${newsletterName}\n\n`;
 
   // URL del video (MP4)
-  const videoUrl = 'https://qu.ax/WTWHk.mp4'; // Reemplázalo con un enlace MP4 válido
+  const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Reemplázalo con un enlace MP4 válido
 
   try {
     const videoResponse = await fetch(videoUrl);
