@@ -24,24 +24,30 @@ let handler = async (m, { conn }) => {
 
   let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
   mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
-
-  // Solo mostramos el mensaje del único owner sin repetir el número
   mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
 
-  // Descargar la imagen de la URL
+  // Descargamos la imagen desde la URL
   const imageUrl = 'https://qu.ax/DnkVz.jpg';
   const response = await fetch(imageUrl);
   const buffer = await response.buffer();
 
-  // Enviar el mensaje con la imagen descargada
+  // Enviamos la imagen con el texto como caption, especificando el mimetype
   await conn.sendMessage(m.chat, { 
-    text: mensaje, 
-    image: buffer, // Usamos el buffer de la imagen descargada
-    caption: 'Aquí está la imagen de bienvenida' // Puedes poner un texto adicional en la imagen
+    image: buffer,
+    caption: mensaje,
+    mimetype: 'image/jpeg'
   }, { quoted: m });
 
   // Enviar el contacto del único owner en formato VCARD
-  const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;${displayName};;;\nFN:${displayName}\nORG:${displayName}\nTITLE:\nTEL;waid=${number}:${number}\nX-ABLabel:${bio}\nEND:VCARD`;
+  const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:;${displayName};;;
+FN:${displayName}
+ORG:${displayName}
+TITLE:
+TEL;waid=${number}:${number}
+X-ABLabel:${bio}
+END:VCARD`;
 
   await conn.sendMessage(m.chat, { 
     contacts: { 
