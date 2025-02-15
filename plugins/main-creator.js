@@ -31,7 +31,7 @@ let handler = async (m, { conn }) => {
   // Enviar el mensaje con la imagen
   await conn.sendMessage(m.chat, { 
     text: mensaje, 
-    image: { url: 'https://example.com/imagen.jpg' } // Cambia esta URL por la imagen que desees
+    image: { url: 'https://qu.ax/CDFVv.jpg' } // Cambia esta URL por la imagen que desees
   }, { quoted: m });
 
   // Enviar el contacto del único owner en formato VCARD
