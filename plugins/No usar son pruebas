@@ -1,0 +1,22 @@
+export async function pluginConBotonDeCanal(m, { conn }) {
+  // Texto principal del mensaje
+  const mensaje = `¡Hola, *${await conn.getName(m.sender)}*! 🌟\n\n¿Quieres ver nuestro canal oficial?`;
+
+  // Envía el mensaje con el botón "Ver canal"
+  await conn.sendMessage(m.chat, {
+    text: mensaje,
+    footer: 'Presiona el botón para ver el canal',
+    buttons: [
+      { buttonId: 'idVerCanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
+    ],
+    headerType: 1
+  }, { quoted: m });
+
+  // Manejar la respuesta del usuario
+  conn.on('message', async (msg) => {
+    if (msg.buttonId === 'idVerCanal') {
+      // Envía el enlace del canal cuando el usuario presiona el botón
+      await conn.sendMessage(m.chat, { text: 'Aquí está el enlace a nuestro canal: https://chat.whatsapp.com/CanaldelGrupo' }, { quoted: msg });
+    }
+  });
+}
