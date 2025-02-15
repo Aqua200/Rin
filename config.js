@@ -25,12 +25,12 @@ global.prems = []
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
 global.packname = ``
-global.author = '{\n "bot": {\n   "name": "Sumi - Sakurasawa",\n     "author": "Neykoor",\n   "status_bot": "active"\n }\n}'
-global.wait = '🐢 *Sumi Sakurasawa*'
-global.botname = 'Sumi - Sakurasawa'
-global.textbot = `Powered By Starlights Team`
-global.listo = '*🍭 Aqui tiene*'
-global.namechannel = '【 ✯ Starlights Team - Oficial Chanel ✰ 】'
+global.author = '{\n "bot": {\n   "name": "🦋𝐀𝐧𝐢𝐤𝐚-𝐁✨𝐭",\n     "author": "Neykoor",\n   "status_bot": "active"\n }\n}'
+global.wait = '🦋𝐀𝐧𝐢𝐤𝐚-𝐁✨𝐭'
+global.botname = '🦋𝐀𝐧𝐢𝐤𝐚-𝐁✨𝐭'
+global.textbot = `🦋𝐀𝐧𝐢𝐤𝐚-𝐁✨𝐭`
+global.listo = 'Aquí tienes, dulzura! 🌸💫'
+global.namechannel = '🦋𝐀𝐧𝐢𝐤𝐚-𝐁✨𝐭'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
