@@ -20,14 +20,23 @@ let handler = async (m, { conn }) => {
     bio = "Sin descripción";
   }
 
-  const newsletterName = 'Seguirme bb 😘';
-  let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
-  mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
-  mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
-  mensaje += `Canal: ${newsletterName}\n\n`;
+  const newsletterName = '🔥 Seguirme bb 😘🔥';
+  
+  let mensaje = `*╔══════════════════╗*\n`;
+  mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
+  mensaje += `*╚══════════════════╝*\n\n`;
+
+  mensaje += `📢 *¡Hey! Aquí tienes la información de mi creador!* 👇\n\n`;
+
+  mensaje += `💖 *Nombre:* ${displayName}\n`;
+  mensaje += `📜 *Bio:* ${bio}\n`;
+  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
+
+  mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
+  mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n`;
 
   // URL del video (MP4)
-  const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que el video dura menos de 6 segundos
+  const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
 
   try {
     const videoResponse = await fetch(videoUrl);
