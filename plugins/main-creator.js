@@ -21,7 +21,7 @@ let handler = async (m, { conn }) => {
     bio = "Sin descripción";
   }
 
-  // Construir el mensaje de texto (caption)
+  // Construir el mensaje de texto
   let txt = `*💞 Creador de la Bot 💋*\n\n`;
   txt += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴄɪᴏ́ɴ\n\n`;
   txt += `• *${displayName}*\n📄 ${bio}\n\n`;
@@ -31,11 +31,12 @@ let handler = async (m, { conn }) => {
   const response = await fetch(imageUrl);
   const img = await response.buffer();
 
-  // ID del canal
+  // Enlace directo al canal
   const canal = '120363206717994793@newsletter';  // ID del canal
+  const canalLink = `https://chat.whatsapp.com/${canal}`;  // Enlace directo al canal
 
-  // Crear el mensaje con un botón de canal
-  const buttonMessage = {
+  // Crear el mensaje con el enlace al canal en un botón
+  const message = {
     image: img,
     caption: txt,
     footer: 'Pulsa el botón para unirte al canal',
@@ -50,7 +51,7 @@ let handler = async (m, { conn }) => {
   };
 
   // Enviar el mensaje con el botón
-  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
+  await conn.sendMessage(m.chat, message, { quoted: m });
 
   // Reaccionar al mensaje
   await m.react('✅');
