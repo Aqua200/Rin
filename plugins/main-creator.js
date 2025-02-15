@@ -39,15 +39,14 @@ let handler = async (m, { conn }) => {
     image: img,
     caption: txt,
     footer: 'Pulsa el botón para unirte al canal',
-    templateButtons: [
+    buttons: [
       {
-        index: 1,
-        urlButton: {
-          displayText: 'Unirse al Canal',
-          url: `https://chat.whatsapp.com/${canal}` // Enlace directo al canal
-        }
+        buttonId: `join_${canal}`, // ID del canal
+        buttonText: { displayText: 'Unirse al Canal' }, // Texto del botón
+        type: 1
       }
-    ]
+    ],
+    headerType: 4
   };
 
   // Enviar el mensaje con el botón
