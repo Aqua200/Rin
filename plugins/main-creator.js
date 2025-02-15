@@ -21,7 +21,7 @@ let handler = async (m, { conn }) => {
   }
 
   const newsletterName = '120363206717994793@newsletter';
-  const newsletterInviteLink = 'https://chat.whatsapp.com/INVITE_CODE'; // Reemplaza INVITE_CODE con el código de invitación real
+  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza con el enlace de invitación real
 
   let mensaje = `*╔══════════════════╗*\n`;
   mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
@@ -74,23 +74,23 @@ END:VCARD`;
   }, { quoted: m });
 
   // Enviar botón de "Ver canal"
-  const button = {
-    buttonText: 'Ver canal',
-    description: 'Haz clic aquí para unirte al canal oficial',
-    sections: [{
-      rows: [{
-        title: 'Ver canal',
-        rowId: `.vercanal ${newsletterInviteLink}`
-      }]
-    }]
+  const buttonMessage = {
+    text: '🔗 *¡Únete a nuestro canal oficial!*',
+    footer: 'Creador de la bot',
+    buttons: [
+      { buttonId: '.vercanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
+    ],
+    headerType: 1
   };
 
-  await conn.sendMessage(m.chat, {
-    text: '🔗 *Ver canal:*',
-    footer: 'Creador de la bot',
-    buttons: [button],
-    headerType: 1
-  }, { quoted: m });
+  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
+};
+
+// Manejador para el comando .vercanal
+handler.command = /^(vercanal)$/i;
+handler.action = async (m) => {
+  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza con el enlace de invitación real
+  await conn.sendMessage(m.chat, { text: `🔗 *¡Únete a nuestro canal oficial!*\n\n${newsletterInviteLink}` }, { quoted: m });
 };
 
 handler.help = ['owner', 'creator', 'creador', 'dueño'];
@@ -98,4 +98,3 @@ handler.tags = ['main'];
 handler.command = ['owner', 'creator', 'creador', 'dueño'];
 
 export default handler;
- 
