@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
-  // Definimos el número y nombre del único owner aquí
+  // Datos del owner
   const contact = ["526631079388", "Anika Dm", 1];
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
@@ -12,7 +12,7 @@ let handler = async (m, { conn }) => {
   } catch (err) {
     displayName = name || "Desconocido";
   }
-
+  
   let bio = "Sin descripción";
   try {
     const biografia = await conn.fetchStatus(jid);
@@ -20,29 +20,33 @@ let handler = async (m, { conn }) => {
   } catch (err) {
     bio = "Sin descripción";
   }
-
-  // Nombre del canal que queremos mostrar en el texto
+  
+  // Definir variables para el mensaje y canal
   const newsletterName = 'Seguirme bb 😘';
-
-  // Creamos el mensaje de texto (caption) incluyendo la información del canal
-  let mensaje = `*💞 Creador de la Bot 💋*\n\n`;
-  mensaje += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
-  mensaje += `• *${displayName}*\n📄 ${bio}\n\n`;
-  mensaje += `Canal: ${newsletterName}\n\n`;
-
+  
+  // Mensaje que se mostrará en el texto (caption)
+  let txt = `*💞 Creador de la Bot 💋*\n\n`;
+  txt += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
+  txt += `• *${displayName}*\n📄 ${bio}\n\n`;
+  txt += `Canal: ${newsletterName}\n\n`;
+  
   // Descargamos la imagen desde la URL
   const imageUrl = 'https://qu.ax/DnkVz.jpg';
   const response = await fetch(imageUrl);
-  const buffer = await response.buffer();
-
-  // Enviamos la imagen con el texto (caption) que incluye la información del canal
-  await conn.sendMessage(m.chat, { 
-    image: buffer,
-    caption: mensaje,
-    mimetype: 'image/jpeg'
-  }, { quoted: m });
-
-  // Enviar el contacto del owner en formato VCARD
+  const img = await response.buffer();
+  
+  // Variables adicionales para sendAi
+  const botname = "MiBot";       // Cambia este valor según tu bot
+  const textbot = "Texto Bot";   // Cambia este valor según prefieras
+  const canal = newsletterName;  // En este ejemplo, canal es el mismo newsletterName
+  
+  // Enviamos el mensaje usando sendAi (los parámetros pueden variar según tu implementación)
+  await conn.sendAi(m.chat, botname, textbot, txt, img, img, canal, m);
+  
+  // Reaccionamos al mensaje con el emoji de verificación
+  await m.react('✅');
+  
+  // Opcional: enviar el contacto del owner en formato VCARD
   const vcard = `BEGIN:VCARD
 VERSION:3.0
 N:;${displayName};;;
@@ -52,12 +56,9 @@ TITLE:
 TEL;waid=${number}:${number}
 X-ABLabel:${bio}
 END:VCARD`;
-
-  await conn.sendMessage(m.chat, { 
-    contacts: { 
-      displayName: displayName, 
-      contacts: [{ vcard }] 
-    }
+  
+  await conn.sendMessage(m.chat, {
+    contacts: { displayName, contacts: [{ vcard }] }
   }, { quoted: m });
 };
 
