@@ -1,6 +1,15 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
+  // Definir variables que faltan
+  const wm = "Tu mensaje o firma aquí"; // Definir wm
+  const bot = "Anika Bot"; // Definir nombre del bot
+  const ig = "Instagram: @tuInstagram"; // Tu cuenta de Instagram
+  const fb = "Facebook: @tuFacebook"; // Tu cuenta de Facebook
+  const imagen2 = "url_de_imagen"; // URL de la imagen para el anuncio
+  const md = "https://enlace.com"; // Un enlace o URL para usar en el anuncio
+  const fkontak = { /* tu objeto de contacto */ }; // Asegúrate de que esto esté correctamente definido
+
   // Verificar si global.official está definido y es un array
   const contacts = Array.isArray(global.official) ? global.official.filter(([_, __, status]) => status === 1) : [];
 
