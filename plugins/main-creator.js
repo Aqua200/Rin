@@ -35,7 +35,8 @@ let handler = async (m, { conn }) => {
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n\n`;
 
-  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
+  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n`;
+  mensaje += `🔗 *Enlace al canal:* ${newsletterInviteLink}\n\n`; // Enlace al canal en el texto
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
@@ -71,13 +72,6 @@ END:VCARD`;
       displayName: displayName,
       contacts: [{ vcard }]
     }
-  }, { quoted: m });
-
-  // Envía el mensaje con el enlace al canal
-  await conn.sendMessage(m.chat, {
-    text: `🔗 *¡Únete a nuestro canal oficial!*\n\n${newsletterInviteLink}`,
-    footer: 'Haz clic en el enlace para unirte al canal',
-    headerType: 1
   }, { quoted: m });
 };
 
