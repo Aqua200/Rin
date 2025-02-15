@@ -110,4 +110,4 @@ if (!rl.listenerCount()) rl.on('line', line => {
 p.emit('message', line.trim())
 })}
 
-start('starlights.js')
+start('start.js')
