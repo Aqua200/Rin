@@ -1,7 +1,9 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-  const contacts = global.official.filter(([_, __, status]) => status === 1);
+  // Verificar si global.official está definido y es un array
+  const contacts = Array.isArray(global.official) ? global.official.filter(([_, __, status]) => status === 1) : [];
+
   const lista = [];
   
   for (const contact of contacts) {
@@ -34,7 +36,7 @@ ${fb}
     cat += `• ${name}\n   📞 +${number}\n   📄 ${bio}\n\n`;
   }
 
-await conn.sendMessage(m.chat, { text: cat, contextInfo: { forwardedNewsletterMessageInfo: { 
+  await conn.sendMessage(m.chat, { text: cat, contextInfo: { forwardedNewsletterMessageInfo: { 
         newsletterJid: '120363392571425662@newsletter', 
         serverMessageId: '', 
         newsletterName: 'Seguirme bb 😘'
