@@ -23,7 +23,7 @@ let handler = async (m, { conn }) => {
 
   // Construir el mensaje de texto (caption)
   let txt = `*💞 Creador de la Bot 💋*\n\n`;
-  txt += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs\n\n`;
+  txt += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴄɪᴏ́ɴ\n\n`;
   txt += `• *${displayName}*\n📄 ${bio}\n\n`;
 
   // Descargar la imagen desde la URL
@@ -31,20 +31,20 @@ let handler = async (m, { conn }) => {
   const response = await fetch(imageUrl);
   const img = await response.buffer();
 
-  // Definir el canal (como en el ejemplo)
+  // Crear el botón con la ID del canal
   const canal = '120363392571425662@newsletter';  // ID del canal
 
-  // Crear el mensaje con el botón
+  // Crear el mensaje con los botones
   const buttonMessage = {
     image: img,
     caption: txt,
-    footer: 'Pulsa el botón para acceder al canal',
+    footer: 'Pulsa el botón para unirte al canal',
     templateButtons: [
       {
-        index: 1,
+        index: 0,
         quickReplyButton: {
-          displayText: 'Canal',
-          id: '120363392571425662@newsletter'; // El canal se coloca aquí
+          displayText: 'Unirse al Canal',
+          id: `chat.${canal}`  // Accionamos el canal como un ID
         }
       }
     ]
