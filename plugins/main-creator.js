@@ -21,7 +21,7 @@ let handler = async (m, { conn }) => {
   }
 
   const newsletterName = '120363206717994793@newsletter';
-  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza INVITE_CODE con el código de invitación real
+  const newsletterInviteLink = 'https://chat.whatsapp.com/INVITE_CODE'; // Reemplaza INVITE_CODE con el código de invitación real
 
   let mensaje = `*╔══════════════════╗*\n`;
   mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
@@ -36,7 +36,6 @@ let handler = async (m, { conn }) => {
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n\n`;
 
   mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
-  mensaje += `🔗 [Ver canal](${newsletterInviteLink})\n`;
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
@@ -73,6 +72,25 @@ END:VCARD`;
       contacts: [{ vcard }]
     }
   }, { quoted: m });
+
+  // Enviar botón de "Ver canal"
+  const button = {
+    buttonText: 'Ver canal',
+    description: 'Haz clic aquí para unirte al canal oficial',
+    sections: [{
+      rows: [{
+        title: 'Ver canal',
+        rowId: `.vercanal ${newsletterInviteLink}`
+      }]
+    }]
+  };
+
+  await conn.sendMessage(m.chat, {
+    text: '🔗 *Ver canal:*',
+    footer: 'Creador de la bot',
+    buttons: [button],
+    headerType: 1
+  }, { quoted: m });
 };
 
 handler.help = ['owner', 'creator', 'creador', 'dueño'];
@@ -80,3 +98,4 @@ handler.tags = ['main'];
 handler.command = ['owner', 'creator', 'creador', 'dueño'];
 
 export default handler;
+ 
