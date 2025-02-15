@@ -30,7 +30,7 @@ async function sendButtons(m) {
     });
 
     // Aquí pones la URL del canal de WhatsApp de prueba
-    const channelLink = 'https://chat.whatsapp.com/ID_DEL_CANAL_O_GRUPO'; // Reemplaza con un ID de canal real
+    const channelLink = '120363392571425662@newsletter'; // Reemplaza con un ID de canal real
 
     // Enviar el mensaje con texto "Hola" y el link del canal
     conn.sendMessage(m.chat, {
