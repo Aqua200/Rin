@@ -31,9 +31,9 @@ let handler = async (m, { conn }) => {
   const response = await fetch(imageUrl);
   const img = await response.buffer();
 
-  // Enlace directo al canal
-  const canal = '120363206717994793@newsletter';  // ID del canal
-  const canalLink = `https://chat.whatsapp.com/${canal}`;  // Enlace directo al canal
+  // ID del canal
+  const canal = '120363206717994793@newsletter';  
+  const canalLink = `https://chat.whatsapp.com/${canal}`;
 
   // Crear el mensaje con el enlace al canal en un botón
   const message = {
