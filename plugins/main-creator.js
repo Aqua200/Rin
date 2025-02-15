@@ -78,7 +78,7 @@ END:VCARD`;
     text: '🔗 *¡Únete a nuestro canal oficial!*',
     footer: 'Creador de la bot',
     buttons: [
-      { buttonId: '.vercanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
+      { buttonId: 'vercanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
     ],
     headerType: 1
   };
