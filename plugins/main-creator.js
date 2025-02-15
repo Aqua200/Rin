@@ -27,7 +27,7 @@ let handler = async (m, { conn }) => {
   mensaje += `Canal: ${newsletterName}\n\n`;
 
   // URL del video (MP4)
-  const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Reemplázalo con un enlace MP4 válido
+  const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que el video dura menos de 6 segundos
 
   try {
     const videoResponse = await fetch(videoUrl);
@@ -36,11 +36,12 @@ let handler = async (m, { conn }) => {
     await conn.sendMessage(m.chat, { 
       video: videoBuffer,
       caption: mensaje,
-      mimetype: 'video/mp4'
+      mimetype: 'video/mp4',
+      gifPlayback: true // Esto hace que WhatsApp lo trate como GIF
     }, { quoted: m });
 
   } catch (error) {
-    console.error('Error al enviar el video:', error);
+    console.error('Error al enviar el video como GIF:', error);
   }
 
   // Enviar el contacto del owner en formato VCARD
