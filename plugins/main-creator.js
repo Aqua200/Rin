@@ -1,64 +1,72 @@
 import fetch from 'node-fetch';
 
-let handler = async (m, { conn }) => {
-  // Datos del owner
-  const contact = ["526631079388", "Anika Dm", 1];
-  const [number, name] = contact;
-  const jid = `${number}@s.whatsapp.net`;
+let handler = async (m, { conn, usedPrefix, text, args, command }) => {
+  const contacts = global.official.filter(([_, __, status]) => status === 1);
+  const lista = [];
+  
+  for (const contact of contacts) {
+    const [number, name, status] = contact;
+    const jid = `${number}@s.whatsapp.net`;
+    const displayName = await conn.getName(jid);
+    const biografia = await conn.fetchStatus(jid).catch(() => null);
+    const bio = biografia?.status || "Sin descripción";
 
-  let displayName;
-  try {
-    displayName = await conn.getName(jid);
-  } catch (err) {
-    displayName = name || "Desconocido";
+    lista.push({ number, name: displayName || name || "Desconocido", bio });
   }
 
-  let bio = "Sin descripción";
-  try {
-    const biografia = await conn.fetchStatus(jid);
-    bio = biografia?.status || bio;
-  } catch (err) {
-    bio = "Sin descripción";
+  let cat = `${wm}
+* ${bot}
+
+*---------------------*
+
+*💞 Creador de la bot𝖎 💋*
+*${ig}*
+
+*Creador Neykoor*
+${fb}
+
+*---------------------*
+
+> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏɴ sᴇ ᴇɴᴠɪᴀʀᴀɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴅᴏʀᴇs`
+
+  for (const item of lista) {
+    const { number, name, bio } = item;
+    cat += `• ${name}\n   📞 +${number}\n   📄 ${bio}\n\n`;
   }
 
-  // Construir el mensaje de texto
-  let txt = `*💞 Creador de la Bot 💋*\n\n`;
-  txt += `> ᴀ ᴄᴏɴᴛɪɴᴜᴀᴄɪᴏ́ɴ sᴇ ᴇɴᴠɪᴀʀᴀ́ɴ ʟᴏs ᴄᴏɴᴛᴀᴄᴛᴏs ᴅᴇ ᴍɪ ᴘʀᴏᴘɪᴇᴛᴀʀɪ@ / ᴅᴇsᴀʀʀᴏʟʟᴀᴄɪᴏ́ɴ\n\n`;
-  txt += `• *${displayName}*\n📄 ${bio}\n\n`;
-
-  // Descargar la imagen desde la URL
-  const imageUrl = 'https://qu.ax/DnkVz.jpg';
-  const response = await fetch(imageUrl);
-  const img = await response.buffer();
-
-  // ID del canal
-  const canal = '120363206717994793@newsletter';  
-  const canalLink = `https://chat.whatsapp.com/${canal}`;
-
-  // Crear el mensaje con el enlace al canal en un botón
-  const message = {
-    image: img,
-    caption: txt,
-    footer: 'Pulsa el botón para unirte al canal',
-    buttons: [
-      {
-        buttonId: `join_${canal}`, // ID del canal
-        buttonText: { displayText: 'Unirse al Canal' }, // Texto del botón
-        type: 1
+await conn.sendMessage(m.chat, { text: cat, contextInfo: { forwardedNewsletterMessageInfo: { 
+        newsletterJid: '120363392571425662@newsletter', 
+        serverMessageId: '', 
+        newsletterName: 'Seguirme bb 😘'
+      },
+      forwardingScore: 9999999,
+      isForwarded: true,   
+      externalAdReply: {  
+        showAdAttribution: true,  
+        renderLargerThumbnail: true,  
+        title: wm,   
+        containsAutoReply: true,  
+        mediaType: 1,   
+        thumbnail: imagen2, 
+        sourceUrl: md
       }
-    ],
-    headerType: 4
-  };
+    } 
+  }, { quoted: fkontak });
 
-  // Enviar el mensaje con el botón para unirse al canal
-  await conn.sendMessage(m.chat, message, { quoted: m });
-
-  // Reaccionar al mensaje
-  await m.react('✅');
+  for (const contact of lista) {
+    const { number, name, bio } = contact;
+    const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;${name};;;\nFN:${name}\nORG:${name}\nTITLE:\nTEL;waid=${number}:${number}\nX-ABLabel:${bio}\nEND:VCARD`;
+    await conn.sendMessage(m.chat, { 
+      contacts: { 
+        displayName: name, 
+        contacts: [{ vcard }] 
+      }
+    }, { quoted: m });
+  }
 };
 
-handler.help = ['owner', 'creator', 'creador', 'dueño'];
+handler.help = ['owner', 'creator', 'creador', 'dueño', 'fgowner'];
 handler.tags = ['main'];
-handler.command = ['owner', 'creator', 'creador', 'dueño'];
+handler.command = ['owner', 'creator', 'creador', 'dueño', 'fgowner'];
 
 export default handler;
