@@ -4,7 +4,7 @@ let handler = async (m, { conn }) => {
   const contact = ["5216631079388", "Anika Dm", 1];
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
-  
+
   let displayName;
   try {
     displayName = await conn.getName(jid);
@@ -21,7 +21,8 @@ let handler = async (m, { conn }) => {
   }
 
   const newsletterName = '120363206717994793@newsletter';
-  
+  const newsletterInviteLink = 'https://chat.whatsapp.com/120363206717994793@newsletter'; // Reemplaza INVITE_CODE con el código de invitación real
+
   let mensaje = `*╔══════════════════╗*\n`;
   mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
   mensaje += `*╚══════════════════╝*\n\n`;
@@ -29,11 +30,13 @@ let handler = async (m, { conn }) => {
   mensaje += `📢 *¡Hey! Aquí tienes la información de mi creador!* 👇\n\n`;
 
   mensaje += `💖 *Nombre:* ${displayName}\n`;
-  mensaje += `📜 *Bio:* ${bio}\n`;
-  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
+  mensaje += `📜 *Bio:* ${bio}\n\n`;
 
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
-  mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n`;
+  mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n\n`;
+
+  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n`;
+  mensaje += `🔗 *Únete al canal:* ${newsletterInviteLink}\n`;
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
@@ -41,8 +44,8 @@ let handler = async (m, { conn }) => {
   try {
     const videoResponse = await fetch(videoUrl);
     const videoBuffer = await videoResponse.buffer();
-    
-    await conn.sendMessage(m.chat, { 
+
+    await conn.sendMessage(m.chat, {
       video: videoBuffer,
       caption: mensaje,
       mimetype: 'video/mp4',
@@ -60,14 +63,14 @@ N:;${displayName};;;
 FN:${displayName}
 ORG:${displayName}
 TITLE:
-TEL;waid=${number}:${number}
+TEL;waid=`${{number}:}$`{number}
 X-ABLabel:${bio}
 END:VCARD`;
 
-  await conn.sendMessage(m.chat, { 
-    contacts: { 
-      displayName: displayName, 
-      contacts: [{ vcard }] 
+  await conn.sendMessage(m.chat, {
+    contacts: {
+      displayName: displayName,
+      contacts: [{ vcard }]
     }
   }, { quoted: m });
 };
