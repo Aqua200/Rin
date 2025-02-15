@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
-  const contact = ["526631079388", "Anika Dm", 1];
+  const contact = ["5216631079388", "Anika Dm", 1];
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
   
@@ -34,9 +34,6 @@ let handler = async (m, { conn }) => {
 
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n`;
-
-  // Agregar %readmore para que el mensaje no sea tan largo
-  mensaje += `%readmore`;
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
