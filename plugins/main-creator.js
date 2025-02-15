@@ -35,6 +35,9 @@ let handler = async (m, { conn }) => {
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n`;
 
+  // Agregar %readmore para que el mensaje no sea tan largo
+  mensaje += `%readmore`;
+
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
 
