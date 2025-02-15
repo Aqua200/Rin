@@ -31,10 +31,10 @@ let handler = async (m, { conn }) => {
   const response = await fetch(imageUrl);
   const img = await response.buffer();
 
-  // Crear el botón con la ID del canal
+  // Definir el canal
   const canal = '120363392571425662@newsletter';  // ID del canal
 
-  // Crear el mensaje con los botones
+  // Crear el mensaje con el botón
   const buttonMessage = {
     image: img,
     caption: txt,
@@ -42,9 +42,9 @@ let handler = async (m, { conn }) => {
     templateButtons: [
       {
         index: 0,
-        quickReplyButton: {
+        urlButton: {
           displayText: 'Unirse al Canal',
-          id: `chat.${canal}`  // Accionamos el canal como un ID
+          url: `https://chat.whatsapp.com/${canal}`  // Canal como URL
         }
       }
     ]
