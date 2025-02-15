@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn }) => {
   // Definimos el número y nombre del único owner aquí
-  const contact = ["5216631079388", "Anika Dm", 1]; // Número y nombre del único owner
+  const contact = ["526631079388", "Anika Dm", 1]; // Número y nombre del único owner
   
   const [number, name] = contact;
   const jid = `${number}@s.whatsapp.net`;
@@ -31,7 +31,7 @@ let handler = async (m, { conn }) => {
   // Enviar el mensaje con la imagen
   await conn.sendMessage(m.chat, { 
     text: mensaje, 
-    image: { url: 'https://qu.ax/CDFVv.jpg' } // Cambia esta URL por la imagen que desees
+    image: { url: 'https://qu.ax/DnkVz.jpg' } // Imagen proporcionada
   }, { quoted: m });
 
   // Enviar el contacto del único owner en formato VCARD
