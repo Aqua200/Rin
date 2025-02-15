@@ -1,12 +1,25 @@
+import sharp from 'sharp';
+import axios from 'axios';
+import fs from 'fs';
+
 let handler = async (m, { conn, usedPrefix, isOwner }) => {
   // URL de la imagen original
-  let imageUrl = 'https://qu.ax/CDFVv.jpg'; // Cambia esta URL por la imagen que desees
+  let imageUrl = 'https://qu.ax/CDFVv.jpg'; // URL de la imagen
 
-  // URL redimensionada usando imgix
-  let resizedImageUrl = `https://qu.ax/CDFVv.jpg?w=300&h=300&fit=crop`; // Redimensiona la imagen a 300x300px
+  // Descargar la imagen
+  const response = await axios({
+    url: imageUrl,
+    method: 'GET',
+    responseType: 'arraybuffer',
+  });
+
+  // Redimensionar la imagen usando sharp
+  let buffer = await sharp(response.data)
+    .resize(300) // Cambia 300 por el tamaño que desees
+    .toBuffer();
 
   // Enviar el mensaje de información con la imagen redimensionada
-  await conn.sendMessage(m.chat, { image: { url: resizedImageUrl }, caption: '🌹info de la bot✨' }, { quoted: m });
+  await conn.sendMessage(m.chat, { image: { url: buffer }, caption: '🌹info de la bot✨' }, { quoted: m });
 
   // VCard del propietario
   let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:Daniel 🇦🇱;;\nFN:Daniel 🇦🇱\nORG:Daniel 🇦🇱\nTITLE:\nitem1.TEL;waid=51955918117:51955918117\nitem1.X-ABLabel:Daniel 🇦🇱\nX-WA-BIZ-DESCRIPTION:\nX-WA-BIZ-NAME:Daniel 🇦🇱\nEND:VCARD`;
