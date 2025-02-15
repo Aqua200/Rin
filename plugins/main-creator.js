@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-  // Definir variables necesarias
   const wm = "Tu mensaje o firma aquí"; // Define wm con un valor apropiado
   const bot = "Anika Bot"; // Nombre del bot
   const ig = "Instagram: @tuInstagram"; // Tu cuenta de Instagram
@@ -59,39 +58,54 @@ ${fb}
     cat += `• ${name}\n   📞 +${number}\n   📄 ${bio}\n\n`;
   }
 
+  // Depuración: Verificar que el mensaje se está construyendo correctamente
+  console.log("Mensaje que se enviará:", cat);
+
   // Enviar mensaje con los contactos
-  await conn.sendMessage(m.chat, { 
-    text: cat, 
-    contextInfo: { 
-      forwardedNewsletterMessageInfo: { 
-        newsletterJid: '120363392571425662@newsletter', 
-        serverMessageId: '', 
-        newsletterName: 'Seguirme bb 😘'
-      },
-      forwardingScore: 9999999,
-      isForwarded: true,   
-      externalAdReply: {  
-        showAdAttribution: true,  
-        renderLargerThumbnail: true,  
-        title: wm,   
-        containsAutoReply: true,  
-        mediaType: 1,   
-        thumbnail: imagen2, 
-        sourceUrl: md
+  try {
+    await conn.sendMessage(m.chat, { 
+      text: cat, 
+      contextInfo: { 
+        forwardedNewsletterMessageInfo: { 
+          newsletterJid: '120363392571425662@newsletter', 
+          serverMessageId: '', 
+          newsletterName: 'Seguirme bb 😘'
+        },
+        forwardingScore: 9999999,
+        isForwarded: true,   
+        externalAdReply: {  
+          showAdAttribution: true,  
+          renderLargerThumbnail: true,  
+          title: wm,   
+          containsAutoReply: true,  
+          mediaType: 1,   
+          thumbnail: imagen2, 
+          sourceUrl: md
+        }
       }
-    }
-  }, { quoted: fkontak });
+    }, { quoted: fkontak });
+
+    console.log("Mensaje enviado correctamente.");
+  } catch (err) {
+    console.error("Error al enviar el mensaje:", err);
+  }
 
   // Enviar información de contacto en formato VCARD
   for (const contact of lista) {
     const { number, name, bio } = contact;
     const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;${name};;;\nFN:${name}\nORG:${name}\nTITLE:\nTEL;waid=${number}:${number}\nX-ABLabel:${bio}\nEND:VCARD`;
-    await conn.sendMessage(m.chat, { 
-      contacts: { 
-        displayName: name, 
-        contacts: [{ vcard }] 
-      }
-    }, { quoted: m });
+    try {
+      await conn.sendMessage(m.chat, { 
+        contacts: { 
+          displayName: name, 
+          contacts: [{ vcard }] 
+        }
+      }, { quoted: m });
+
+      console.log(`VCARD de ${name} enviada.`);
+    } catch (err) {
+      console.error(`Error al enviar VCARD de ${name}:`, err);
+    }
   }
 };
 
