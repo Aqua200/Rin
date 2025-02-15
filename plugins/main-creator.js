@@ -73,15 +73,17 @@ END:VCARD`;
     }
   }, { quoted: m });
 
-  // Envía el mensaje con el botón "Ver canal" (sin repetir el texto)
-  await conn.sendMessage(m.chat, {
+  // Envía el mensaje con el botón "Ver canal"
+  const buttonMessage = {
     text: '🔗 *¡Únete a nuestro canal oficial!*',
     footer: 'Presiona el botón para ver el canal',
     buttons: [
       { buttonId: 'idVerCanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
     ],
     headerType: 1
-  }, { quoted: m });
+  };
+
+  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
 };
 
 // Manejador para el botón "Ver canal"
