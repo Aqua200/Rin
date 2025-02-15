@@ -35,8 +35,7 @@ let handler = async (m, { conn }) => {
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n\n`;
 
-  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n`;
-  mensaje += `🔗 *Enlace al canal:* ${newsletterInviteLink}\n\n`; // Enlace al canal en el texto
+  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
@@ -73,6 +72,25 @@ END:VCARD`;
       contacts: [{ vcard }]
     }
   }, { quoted: m });
+
+  // Envía el mensaje con el botón "Ver canal"
+  const buttonMessage = {
+    text: '🔗 *¡Únete a nuestro canal oficial!*',
+    footer: 'Presiona el botón para ver el canal',
+    buttons: [
+      { buttonId: 'idVerCanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
+    ],
+    headerType: 1
+  };
+
+  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
+};
+
+// Manejador para el botón "Ver canal"
+handler.command = /^(idVerCanal)$/i;
+handler.action = async (m) => {
+  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza con el enlace de invitación real
+  await conn.sendMessage(m.chat, { text: `🔗 *¡Únete a nuestro canal oficial!*\n\n${newsletterInviteLink}` }, { quoted: m });
 };
 
 handler.help = ['owner', 'creator', 'creador', 'dueño'];
