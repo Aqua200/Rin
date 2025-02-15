@@ -21,7 +21,7 @@ let handler = async (m, { conn }) => {
   }
 
   const newsletterName = '120363206717994793@newsletter';
-  const newsletterInviteLink = 'https://chat.whatsapp.com/120363206717994793@newsletter'; // Reemplaza INVITE_CODE con el código de invitación real
+  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza INVITE_CODE con el código de invitación real
 
   let mensaje = `*╔══════════════════╗*\n`;
   mensaje += `*║ 💞 CREADOR DE LA BOT 💋*  \n`;
@@ -35,8 +35,8 @@ let handler = async (m, { conn }) => {
   mensaje += `🔹 Si tienes dudas, sugerencias o quieres reportar algo, contáctame. 😎\n\n`;
   mensaje += `✨ *¡Gracias por usar mi bot!* 💖\n\n`;
 
-  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n`;
-  mensaje += `🔗 *Únete al canal:* ${newsletterInviteLink}\n`;
+  mensaje += `📌 *Canal Oficial:* ${newsletterName}\n\n`;
+  mensaje += `🔗 [Ver canal](${newsletterInviteLink})\n`;
 
   // URL del video (MP4)
   const videoUrl = 'https://qu.ax/TNCDy.mp4'; // Asegúrate de que dure menos de 6 segundos
