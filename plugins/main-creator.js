@@ -73,24 +73,12 @@ END:VCARD`;
     }
   }, { quoted: m });
 
-  // Envía el mensaje con el botón "Ver canal"
-  const buttonMessage = {
-    text: '🔗 *¡Únete a nuestro canal oficial!*',
-    footer: 'Presiona el botón para ver el canal',
-    buttons: [
-      { buttonId: 'idVerCanal', buttonText: { displayText: 'Ver canal' }, type: 1 }
-    ],
+  // Envía el mensaje con el enlace al canal
+  await conn.sendMessage(m.chat, {
+    text: `🔗 *¡Únete a nuestro canal oficial!*\n\n${newsletterInviteLink}`,
+    footer: 'Haz clic en el enlace para unirte al canal',
     headerType: 1
-  };
-
-  await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
-};
-
-// Manejador para el botón "Ver canal"
-handler.command = /^(idVerCanal)$/i;
-handler.action = async (m) => {
-  const newsletterInviteLink = 'https://whatsapp.com/channel/0029VazHywx0rGiUAYluYB24'; // Reemplaza con el enlace de invitación real
-  await conn.sendMessage(m.chat, { text: `🔗 *¡Únete a nuestro canal oficial!*\n\n${newsletterInviteLink}` }, { quoted: m });
+  }, { quoted: m });
 };
 
 handler.help = ['owner', 'creator', 'creador', 'dueño'];
