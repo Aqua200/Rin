@@ -4,47 +4,48 @@ import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
 
 let tags = {
-  'main': 'Info 📚',
-  'search': 'Busquedas 🔎',
-  'game': 'Juegos 🎮',
-  'serbot': 'Sub Bots 🤖',
-  'rpg': 'RPG 🌠',
-  'rg': 'Registro 📁',
-  'sticker': 'Stickers 🏞',
-  'img': 'Imágenes 📸',
-  'group': 'Grupos 👥',
-  'logo': 'Logo - maker 🎨',
-  'nable': 'On / Off 📴', 
-  'downloader': 'Descargas 📥',
-  'tools': 'Herramientas 🔧',
-  'fun': 'Diversión 🎲',
-  'nsfw': 'Nsfw 🔞', 
-  'owner': 'Creador 😺', 
-  'audio': 'Audios 🔉', 
-  'advanced': 'Avanzado 💠',
+  'main': '🌸 Información',
+  'search': '🔍 Búsquedas',
+  'game': '🎮 Juegos',
+  'serbot': '🤖 Sub Bots',
+  'rpg': '✨ RPG',
+  'rg': '📂 Registro',
+  'sticker': '🏞 Stickers',
+  'img': '📸 Imágenes',
+  'group': '👥 Grupos',
+  'logo': '🎨 Logos',
+  'nable': '📴 On / Off', 
+  'downloader': '📥 Descargas',
+  'tools': '🛠 Herramientas',
+  'fun': '🎭 Diversión',
+  'nsfw': '🔞 NSFW', 
+  'owner': '👑 Creadora', 
+  'audio': '🔊 Audios', 
+  'advanced': '💎 Avanzado',
 }
 
 const defaultMenu = {
   before: `
-*꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
+╭───────────🌸✧˚·  
+│  𝑯𝒐𝒍𝒂, *%name*! 💖  
+│  🌷 ¿𝑪𝒐́𝒎𝒐 𝒆𝒔𝒕𝒂́𝒔 𝒉𝒐𝒚?  
+│  ☁️ Espero que tengas un *día hermoso*.  
+╰───────────🌸✧˚·  
 
-“ hello *%name*, Cómo se encuentra el día de hoy? ”
+┏━━━━━━━━━━━━━━━❀
+┃ *🌟 𝑻𝒖 𝑰𝒏𝒇𝒐:*  
+┃ 💖 Nombre: *%name*  
+┃ 🍭 Dulces: *%limit*  
+┃ ✨ XP: *%totalexp*  
+┃ 🌟 Nivel: *%level*  
+┗━━━━━━━━━━━━━━━❀  
 
-╭──⬣「 *Info User* 」⬣
-│  ≡◦ *🍭 Nombre ∙* %name
-│  ≡◦ *🍬 Dulces ∙* %limit
-│  ≡◦ *💫 XP ∙* %totalexp
-│  ≡◦ *🐢 Nivel ∙* %level
-╰──⬣
-%readmore
-*꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
-
-\t\t\t*L I S T A  -  M E N Ú S*
+┏━━🌸 *𝑴𝑬𝑵𝑼́ 𝑫𝑬 𝑪𝑶𝑴𝑨𝑵𝑫𝑶𝑺* 🌸━━┓
 `.trimStart(),
-header: '╭──⬣「 *%category* 」⬣',
-body: '│  ≡◦ *%cmd*\n',
-footer: '╰──⬣\n',
-after: '',
+  header: '🌸✧˚·── 「 *%category* 」──✧˚·🌸',
+  body: '❀ ✨ *%cmd*\n',
+  footer: '🌷✧˚·──────────────✧˚·💖\n',
+  after: '',
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
