@@ -86,26 +86,26 @@ async function start(file) {
     const currentTime = new Date().toLocaleString();
     let lineM = '⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ 》';
 
-    console.log(chalk.yellow(`╭${lineM}
-┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`🖥️ `${{os.type()},}$`{os.release()} - ${os.arch()}`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`)}
-┊${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊`${{chalk.blueBright('┊')}}$`{chalk.blue.bold(`🟢 INFORMACIÓN :`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💚 Nombre: ${packageJsonObj.name}`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`𓃠 Versión: ${packageJsonObj.version}`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💜 Descripción: ${packageJsonObj.description}`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💕 Dueña : 𝕮𝖍𝖎𝖓𝖆 𝕸𝖎𝖙𝖟𝖚𝖐𝖎 💋`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`ღ Project Author, bot personalizado hecho por:  ${packageJsonObj.author.name}`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`⏰ Hora Actual :`)}
-┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`${currentTime}`)}
-┊${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-╰${lineM}`));
+    console.log(chalk.yellow(`╭${lineM}`));
+    console.log(chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('┊') + chalk.yellow(`🖥️ `${{os.type()},}$`{os.release()} - ${os.arch()}`));
+    console.log(chalk.blueBright('┊') + chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`));
+    console.log(chalk.blueBright('┊') + chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
+    console.log(chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('┊') + chalk.blue.bold('🟢 INFORMACIÓN :'));
+    console.log(chalk.blueBright('┊') + chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`💚 Nombre: ${packageJsonObj.name}`));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`𓃠 Versión: ${packageJsonObj.version}`));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`💜 Descripción: ${packageJsonObj.description}`));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`💕 Dueña : 𝕮𝖍𝖎𝖓𝖆 𝕸𝖎𝖙𝖟𝖚𝖐𝖎 💋`));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`ღ Project Author, bot personalizado hecho por:  ${packageJsonObj.author.name}`));
+    console.log(chalk.blueBright('┊') + chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`⏰ Hora Actual :`));
+    console.log(chalk.blueBright('┊') + chalk.cyan(`${currentTime}`));
+    console.log(chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
+    console.log(chalk.yellow(`╰${lineM}`));
 
     setInterval(() => {}, 1000);
   } catch (err) {
