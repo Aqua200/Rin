@@ -19,7 +19,16 @@ import Pino from 'pino';
 import {Boom} from '@hapi/boom'
 import {makeWASocket, protoType, serialize} from './lib/simple.js'
 import { Low } from 'lowdb';
-import { JSONFile } from 'lowdb/node'; // O la forma correcta según la versión de lowdb
+import { JSONFile } from 'lowdb/node';  // Si esta importación es válida en tu versión de lowdb
+
+// Configuración del archivo JSON
+const db = new Low(new JSONFile('db.json'));
+
+// Inicializar la base de datos con un valor predeterminado
+db.data ||= { users: [], settings: {} }; // Establecer datos predeterminados si no existen
+
+// Ahora puedes trabajar con la base de datos
+await db.read();
 import {mongoDB, mongoDBV2} from './lib/mongoDB.js'
 import store from './lib/store.js'
 const {proto} = (await import('@whiskeysockets/baileys')).default
