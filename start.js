@@ -29,6 +29,7 @@ db.data ||= { users: [], settings: {} }; // Establecer datos predeterminados si 
 
 // Ahora puedes trabajar con la base de datos
 await db.read();
+console.log(db.data);
 import {mongoDB, mongoDBV2} from './lib/mongoDB.js'
 import store from './lib/store.js'
 const {proto} = (await import('@whiskeysockets/baileys')).default
