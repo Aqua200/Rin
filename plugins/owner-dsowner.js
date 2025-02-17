@@ -39,17 +39,19 @@ const handler = async (m, { conn, usedPrefix }) => {
     } else {
       await conn.sendMessage(m.chat, { text: `🍭 Se eliminaron ${filesDeleted} archivos.` }, { quoted: m });
     }
+
+    // Enviar mensaje con GIF desde URL
+    const gifUrl = 'https://example.com/path/to/your/image.gif'; // Reemplaza con la URL de tu GIF
+    await conn.sendMessage(m.chat, { video: { url: gifUrl }, gifPlayback: true, caption: '¡Hola! ¿Ahora me ves?' }, { quoted: m });
+
   } catch (error) {
     console.error('Error al eliminar archivos de sesión:', error);
-    await conn.sendMessage(m.chat, { text: '🍭 Ocurrió un error al eliminar los archivos de sesión.' }, { quoted: m });
+    await conn.sendMessage(m.chat, { text: '🍭 Hubo un error al ejecutar el comando.' }, { quoted: m });
   }
-
-  await conn.sendMessage(m.chat, { text: `¡Hola! ¿Ahora me ves?` }, { quoted: m });
 };
 
-//handler.tags = ['owner']
-//handler.help = ['dsowner']
-handler.command = /^(del_reg_in_session_owner|dsowner|clearallsession)$/i;
+// Cambiar el nombre del comando a dsowneranix
+handler.command = new RegExp(`^(`${{prefix}del_reg_in_session_owner|}$`{prefix}dsowneranix|`${{prefix}clearallsession)}$``, 'i');
 handler.rowner = true;
 
 export default handler;
