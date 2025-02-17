@@ -88,7 +88,7 @@ async function start(file) {
 
     console.log(chalk.yellow(`╭${lineM}`));
     console.log(chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
-    console.log(chalk.blueBright('┊') + chalk.yellow(`🖥️ `${{os.type()},}$`{os.release()} - ${os.arch()}`));
+    console.log(chalk.blueBright('┊') + chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`)); // 🔹 CORRECCIÓN AQUÍ
     console.log(chalk.blueBright('┊') + chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`));
     console.log(chalk.blueBright('┊') + chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`));
     console.log(chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅'));
