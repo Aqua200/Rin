@@ -1,29 +1,57 @@
-import Scraper from '@SumiFX/Scraper'
+import yts from 'yt-search';
+import fetch from 'node-fetch';
 
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-if (!text) return conn.reply(m.chat, '🍭 Ingresa el título de un video o canción de YouTube.\n\n`Ejemplo:`\n' + `> *${usedPrefix + command}* Gemini Aaliyah - If Only`, m)
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) {
+        return conn.reply(m.chat, `❀ Especifica el formato (MP3 o MP4) y la búsqueda. Ejemplo: *${usedPrefix}${command} MP3 <término>*`, m);
+    }
 
-let user = global.db.data.users[m.sender]
-try {
-let res = await Scraper.ytsearch(text)
-let { title, size, quality, thumbnail, dl_url } = await Scraper.ytmp4(res[0].url)
-if (size.includes('GB') || size.replace(' MB', '') > 300) { return await m.reply('El archivo pesa mas de 300 MB, se canceló la Descarga.')}
-let txt = `╭─⬣「 *YouTube Play* 」⬣\n`
-    txt += `│  ≡◦ *🍭 Titulo ∙* ${title}\n`
-    txt += `│  ≡◦ *📅 Publicado ∙* ${res[0].published}\n`
-    txt += `│  ≡◦ *🕜 Duración ∙* ${res[0].duration}\n`
-    txt += `│  ≡◦ *👤 Autor ∙* ${res[0].author}\n`
-    txt += `│  ≡◦ *⛓ Url ∙* ${res[0].url}\n`
-    txt += `│  ≡◦ *🪴 Calidad ∙* ${quality}\n`
-    txt += `│  ≡◦ *⚖ Peso ∙* ${size}\n`
-    txt += `╰─⬣`
-await conn.sendFile(m.chat, thumbnail, 'thumbnail.jpg', txt, m)
-await conn.sendFile(m.chat, dl_url, title + '.mp4', `*🍭 Titulo ∙* ${title}\n*🪴 Calidad ∙* ${quality}`, m, false, { asDocument: user.useDocument })
-} catch {
-}}
-handler.help = ["play2 <búsqueda>"]
-handler.tags = ["downloader"]
-handler.command = ["play2"]
-handler.register = true
-//handler.limit = 1
-export default handler
+    const [format, ...query] = text.split(' ');
+    if (!['MP3', 'MP4'].includes(format)) {
+        return conn.reply(m.chat, `❀ Formato no válido. Usa *${usedPrefix}${command} MP3 <búsqueda>* o *${usedPrefix}${command} MP4 <búsqueda>*`, m);
+    }
+
+    const searchQuery = query.join(' ');
+    if (!searchQuery) {
+        return conn.reply(m.chat, `❀ Por favor, escribe un término de búsqueda después del formato.`, m);
+    }
+
+    try {
+        await m.react('📦');
+
+        
+        let res = await yts(searchQuery);
+        let video = res.videos[0];
+        if (!video) {
+            throw `❀ No se encontraron resultados para *${searchQuery}*.`;
+        }
+
+        let { title, videoId } = video;
+        let apiUrl = `https://api.siputzx.my.id/api/d/yt${format.toLowerCase()}?url=https://www.youtube.com/watch?v=${videoId}`;
+        let apiResponse = await (await fetch(apiUrl)).json();
+        let dl_url = apiResponse.data.dl;
+
+        if (format === 'MP3') {
+            await conn.sendMessage(
+                m.chat,
+                { audio: { url: dl_url }, mimetype: "audio/mp4", ptt: true },
+                { quoted: m }
+            );
+        } else if (format === 'MP4') {
+            await conn.sendMessage(
+                m.chat,
+                { video: { url: dl_url }, caption: `❀ Descargado: *${title}*` },
+                { quoted: m }
+            );
+        }
+
+        await m.react('✅');
+    } catch (error) {
+        console.error(error);
+        conn.reply(m.chat, `❀ Hubo un error: ${error}`, m);
+    }
+};
+
+handler.command = ['play'];
+
+export default handler;
