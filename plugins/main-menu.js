@@ -116,10 +116,10 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 
     // Lista de imágenes aleatorias
     let images = [
-      './storage/img/miniurl.jpg',
       './storage/img/Anika.jpg',
       './storage/img/Anikabot.jpg', 
       './storage/img/Anikanew.jpg'
+      './storage/img/Anikanext.jpg'
     ];
 
     // Seleccionar una imagen aleatoria
