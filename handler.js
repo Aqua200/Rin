@@ -328,10 +328,13 @@ export async function handler(chatUpdate) {
                     console.error(e)
                     if (e) {
                         let text = format(e)
-                        for (let key of Object.values(global.APIKeys))
-                            text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
-                        m.reply(text)
-                    }
+                        if (global.APIKeys && typeof global.APIKeys === 'object') {
+    for (let key of Object.values(global.APIKeys)) {
+        text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
+    }
+} else {
+    console.error("global.APIKeys es undefined o no es un objeto");
+                        }
                 } finally {
                     if (typeof plugin.after === 'function') {
                         try {
