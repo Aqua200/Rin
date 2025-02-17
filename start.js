@@ -19,7 +19,11 @@ import pino from 'pino'
 import Pino from 'pino';
 import {Boom} from '@hapi/boom'
 import {makeWASocket, protoType, serialize} from './lib/simple.js'
-import {Low, JSONFile} from 'lowdb'
+import low from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
 import {mongoDB, mongoDBV2} from './lib/mongoDB.js'
 import store from './lib/store.js'
 const {proto} = (await import('@whiskeysockets/baileys')).default
