@@ -12,6 +12,8 @@ import chalk from 'chalk';
 import path from 'path';
 import os from 'os';
 import { promises as fsPromises } from 'fs';
+import low from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(__dirname);
@@ -35,10 +37,10 @@ var isRunning = false;
 async function start(file) {
   if (isRunning) return;
   isRunning = true;
-  
+
   const currentFilePath = new URL(import.meta.url).pathname;
   let args = [join(__dirname, file), ...process.argv.slice(2)];
-  
+
   say([process.argv[0], ...args].join(' '), {
     font: 'console',
     align: 'center',
@@ -65,7 +67,7 @@ async function start(file) {
   p.on('exit', (_, code) => {
     isRunning = false;
     console.error('⚠️ ERROR ⚠️ >> ', code);
-    start('start.js'); // Corregido: ahora usa 'start.js' en vez de 'main.js'
+    start('start.js');
 
     if (code === 0) return;
     watchFile(args[0], () => {
@@ -83,26 +85,26 @@ async function start(file) {
     const packageJsonObj = JSON.parse(packageJsonData);
     const currentTime = new Date().toLocaleString();
     let lineM = '⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ 》';
-    
+
     console.log(chalk.yellow(`╭${lineM}
 ┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊${chalk.blueBright('┊')}${chalk.yellow(`🖥️ ${os.type()}, ${os.release()} - ${os.arch()}`)}
-┊${chalk.blueBright('┊')}${chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`)}
-┊${chalk.blueBright('┊')}${chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`🖥️ `${{os.type()},}$`{os.release()} - ${os.arch()}`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`💾 Total RAM: ${ramInGB.toFixed(2)} GB`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.yellow(`💽 Free RAM: ${freeRamInGB.toFixed(2)} GB`)}
 ┊${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
 ┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊${chalk.blueBright('┊')} ${chalk.blue.bold(`🟢 INFORMACIÓN :`)}
-┊${chalk.blueBright('┊')} ${chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')} 
-┊${chalk.blueBright('┊')}${chalk.cyan(`💚 Nombre: ${packageJsonObj.name}`)}
-┊${chalk.blueBright('┊')}${chalk.cyan(`𓃠 Versión: ${packageJsonObj.version}`)}
-┊${chalk.blueBright('┊')}${chalk.cyan(`💜 Descripción: ${packageJsonObj.description}`)}
-┊${chalk.blueBright('┊')}${chalk.cyan(`💕 Dueña : 𝕮𝖍𝖎𝖓𝖆 𝕸𝖎𝖙𝖟𝖚𝖐𝖎 💋`)}
-┊${chalk.blueBright('┊')}${chalk.cyan(`ღ Project Author, bot personalizado hecho por:  ${packageJsonObj.author.name}`)}
-┊${chalk.blueBright('┊')}${chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')} 
+┊`${{chalk.blueBright('┊')}}$`{chalk.blue.bold(`🟢 INFORMACIÓN :`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💚 Nombre: ${packageJsonObj.name}`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`𓃠 Versión: ${packageJsonObj.version}`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💜 Descripción: ${packageJsonObj.description}`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`💕 Dueña : 𝕮𝖍𝖎𝖓𝖆 𝕸𝖎𝖙𝖟𝖚𝖐𝖎 💋`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`ღ Project Author, bot personalizado hecho por:  ${packageJsonObj.author.name}`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.blueBright('┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
 ┊${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
-┊${chalk.blueBright('┊')}${chalk.cyan(`⏰ Hora Actual :`)}
-┊${chalk.blueBright('┊')}${chalk.cyan(`${currentTime}`)}
-┊${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')} 
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`⏰ Hora Actual :`)}
+┊`${{chalk.blueBright('┊')}}$`{chalk.cyan(`${currentTime}`)}
+┊${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
 ╰${lineM}`));
 
     setInterval(() => {}, 1000);
@@ -117,4 +119,4 @@ async function start(file) {
     });
 }
 
-start('start.js'); // También corregido aquí
+start('start.js');
