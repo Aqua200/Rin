@@ -12,8 +12,15 @@ import chalk from 'chalk';
 import path from 'path';
 import os from 'os';
 import { promises as fsPromises } from 'fs';
-import low from 'lowdb';
-import FileSync from 'lowdb/adapters/FileSync';
+import { Low } from 'lowdb'
+import { JSONFile } from 'lowdb/node'
+
+const adapter = new JSONFile('db.json')
+const db = new Low(adapter)
+
+await db.read()
+db.data ||= { users: [] }
+await db.write()
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(__dirname);
