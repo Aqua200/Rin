@@ -149,6 +149,17 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let pp = './storage/img/miniurl.jpg'
     await conn.sendFile(m.chat, pp, 'thumbnail.jpg', text.trim(), m, null, rcanal)
 
+let images = [
+  './storage/img/miniurl.jpg',    // Primera imagen
+  './storage/img/miniurl².jpg'    // Segunda imagen
+];
+
+let randomImage = images[Math.floor(Math.random() * images.length)];
+
+await conn.sendFile(m.chat, randomImage, 'thumbnail.jpg', text.trim(), m, null, rcanal);
+
+
+    
   } catch (e) {
     conn.reply(m.chat, 'Lo sentimos, el menú tiene un error.', m)
     throw e
